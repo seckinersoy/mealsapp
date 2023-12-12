@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/data/dummy_data.dart';
 import 'package:mealsapp/models/category.dart';
+import 'package:mealsapp/screens/favorites.dart';
 import 'package:mealsapp/screens/meals.dart';
-import 'package:mealsapp/screens/side_drawer.dart';
-import 'package:mealsapp/widgets/catergory_card.dart';
+import 'package:mealsapp/widgets/category_card.dart';
 
 class Categories extends StatelessWidget {
   const Categories({Key? key}) : super(key: key);
@@ -22,6 +22,14 @@ class Categories extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bir kategori seçin.."),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const Favorites()));
+              },
+              icon: const Icon(Icons.favorite))
+        ],
       ),
       body: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -37,7 +45,19 @@ class Categories extends StatelessWidget {
             )
         ],
       ),
-      drawer: const SideDrawer(),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const [
+            DrawerHeader(
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: Text('Home'),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
